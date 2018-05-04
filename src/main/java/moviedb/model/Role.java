@@ -1,4 +1,4 @@
-package model;
+package moviedb.model;
 
 import org.springframework.security.core.GrantedAuthority;
 

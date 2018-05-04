@@ -1,4 +1,4 @@
-package com;
+package moviedb.com;
 
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.*;

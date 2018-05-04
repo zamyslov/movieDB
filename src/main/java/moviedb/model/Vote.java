@@ -1,7 +1,9 @@
-package model;
+package moviedb.model;
 
+import javax.persistence.Entity;
 import java.util.Objects;
 
+@Entity
 public class Vote {
     private User user;
     private Movie movie;

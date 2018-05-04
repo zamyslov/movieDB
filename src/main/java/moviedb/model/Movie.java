@@ -1,8 +1,10 @@
-package model;
+package moviedb.model;
 
+import javax.persistence.Entity;
 import java.util.Objects;
 import java.util.Set;
 
+@Entity
 public class Movie {
     private String name;
     private int year;
