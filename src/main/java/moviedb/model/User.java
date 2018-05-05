@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-public class User {
+public class User extends AbstractBaseEntity{
     private String login;
     private String password;
     private Set<Role> roles;

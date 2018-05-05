@@ -46,7 +46,6 @@ public class JpaConfig {
     @Value("${spring.jpa.hibernate.ddl-auto}")
     private String hbm2ddlAuto;
 
-
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertyConfigIn() {
         return new PropertySourcesPlaceholderConfigurer();
