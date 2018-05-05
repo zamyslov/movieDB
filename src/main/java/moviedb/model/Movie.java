@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-public class Movie {
+public class Movie extends AbstractBaseEntity{
     private String name;
     private int year;
     private Set<Actor> cast;
