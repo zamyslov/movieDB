@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
-    private static final Sort SORT_NAME_EMAIL = new Sort(Sort.Direction.ASC, "name");
+    private static final Sort SORT_LOGIN= new Sort(Sort.Direction.ASC, "login");
 
     @Autowired
     private CrudUserRepository crudRepository;
@@ -34,7 +34,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> getAll() {
-        return crudRepository.findAll(SORT_NAME_EMAIL);
+        return crudRepository.findAll(SORT_LOGIN);
     }
 
     @Override

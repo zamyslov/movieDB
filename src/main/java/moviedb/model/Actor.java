@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import java.util.Objects;
 
 @Entity
-public class Actor {
+public class Actor extends AbstractBaseEntity{
     private String name;
     private String surname;
     private int dob;
