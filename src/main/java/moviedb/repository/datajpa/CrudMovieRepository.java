@@ -1,8 +1,8 @@
 package moviedb.repository.datajpa;
 
-import moviedb.model.Actor;
 import moviedb.model.Movie;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -28,4 +28,11 @@ public interface CrudMovieRepository extends JpaRepository<Movie, Integer> {
     @Override
     List<Movie> findAll(Sort sort);
 
+    @EntityGraph(attributePaths = {"votes"}, type = EntityGraph.EntityGraphType.LOAD)
+    @Query("SELECT u FROM Movie u WHERE u.id=?1")
+    Movie getWithVotes(int id);
+
+    @EntityGraph(attributePaths = {"votes"}, type = EntityGraph.EntityGraphType.LOAD)
+    @Query("SELECT avg(mark) FROM Vote v WHERE v.movie.id=?1")
+    double getAverageMark(int id);
 }

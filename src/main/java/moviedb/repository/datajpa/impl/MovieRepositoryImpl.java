@@ -36,4 +36,13 @@ public class MovieRepositoryImpl implements MovieRepository {
         return crudRepository.findAll(SORT_NAME);
     }
 
+    @Override
+    public Movie getWithVotes(int id) {
+        return crudRepository.getWithVotes(id);
+    }
+
+    @Override
+    public double getAverageMark(int id) {
+        return crudRepository.getAverageMark(id);
+    }
 }

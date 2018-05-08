@@ -15,4 +15,7 @@ public interface MovieRepository {
 
     List<Movie> getAll();
 
+    Movie getWithVotes(int id);
+
+    double getAverageMark(int id);
 }

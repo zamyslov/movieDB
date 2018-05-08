@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class DataJpaVoteRepositoryImpl implements VoteRepository {
+public class VoteRepositoryImpl implements VoteRepository {
 
     @Autowired
     private CrudVoteRepository crudRepository;

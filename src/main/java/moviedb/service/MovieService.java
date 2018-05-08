@@ -21,4 +21,6 @@ public interface MovieService {
     void deleteActor(Movie movie, Actor actor);
 
     List<Movie> getAll();
+
+    double getAverageMark(int id);
 }

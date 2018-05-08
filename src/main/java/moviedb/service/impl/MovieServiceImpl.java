@@ -65,4 +65,9 @@ public class MovieServiceImpl implements MovieService {
         cast.remove(actor);
         movie.setCast(cast);
     }
+
+    @Override
+    public double getAverageMark(int id) {
+        return repository.getAverageMark(id);
+    }
 }

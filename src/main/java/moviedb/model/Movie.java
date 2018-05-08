@@ -1,14 +1,18 @@
 package moviedb.model;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@Table(name = "movie", uniqueConstraints = {@UniqueConstraint(columnNames = "name", name = "movie_unique_name_idx")})
 public class Movie extends AbstractBaseEntity{
     private String name;
     private int year;
     private Set<Actor> cast;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "movie")
     private Set<Vote> votes;
 
     public Movie() {
