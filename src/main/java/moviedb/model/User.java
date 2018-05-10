@@ -5,9 +5,10 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-public class User extends AbstractBaseEntity{
+public class User extends AbstractBaseEntity {
     private String login;
     private String password;
+    private String name;
     private Set<Role> roles;
     private Set<Vote> votes;
     private Set<Vote> favoriteMovies;
@@ -15,9 +16,10 @@ public class User extends AbstractBaseEntity{
     public User() {
     }
 
-    public User(String login, String password, Set<Role> roles) {
+    public User(String login, String password, String name, Set<Role> roles) {
         this.login = login;
         this.password = password;
+        this.name = name;
         this.roles = roles;
     }
 
@@ -39,6 +41,14 @@ public class User extends AbstractBaseEntity{
 
     public Set<Role> getRoles() {
         return roles;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setRoles(Set<Role> roles) {
@@ -70,6 +80,7 @@ public class User extends AbstractBaseEntity{
                 Objects.equals(password, user.password) &&
                 Objects.equals(roles, user.roles) &&
                 Objects.equals(votes, user.votes) &&
+                Objects.equals(name, user.name) &&
                 Objects.equals(favoriteMovies, user.favoriteMovies);
     }
 
@@ -82,6 +93,7 @@ public class User extends AbstractBaseEntity{
     @Override
     public String toString() {
         return "User{" +
+                "name='" + login + '\'' +
                 "login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", roles=" + roles +
