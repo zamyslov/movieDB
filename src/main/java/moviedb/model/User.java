@@ -1,17 +1,46 @@
 package moviedb.model;
 
-import javax.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "login", name = "users_unique_login_idx")})
 public class User extends AbstractBaseEntity {
+    @Column(name = "login")
+    @NotBlank
     private String login;
+
+    @Column(name = "password")
+    @NotBlank
+    @Size(min = 5, max = 64)
     private String password;
+
+    @Column(name = "name")
+    @NotBlank
     private String name;
+
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "role")
+    @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @JsonManagedReference(value = "votes")
     private Set<Vote> votes;
-    private Set<Vote> favoriteMovies;
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "user_movies",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "movie_id") }
+    )
+    private Set<Movie> favoriteMovies;
 
     public User() {
     }
@@ -63,11 +92,11 @@ public class User extends AbstractBaseEntity {
         this.votes = votes;
     }
 
-    public Set<Vote> getFavoriteMovies() {
+    public Set<Movie> getFavoriteMovies() {
         return favoriteMovies;
     }
 
-    public void setFavoriteMovies(Set<Vote> favoriteMovies) {
+    public void setFavoriteMovies(Set<Movie> favoriteMovies) {
         this.favoriteMovies = favoriteMovies;
     }
 
