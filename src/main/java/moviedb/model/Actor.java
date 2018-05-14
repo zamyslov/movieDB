@@ -1,12 +1,29 @@
 package moviedb.model;
 
+import org.hibernate.validator.constraints.Range;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
 @Entity
-public class Actor extends AbstractBaseEntity{
+@Table(name = "actors", uniqueConstraints = {@UniqueConstraint(columnNames = "name, surname", name = "actors_unique_name_surname_idx")})
+public class Actor extends AbstractBaseEntity {
+
+    @Column(name = "name")
+    @NotBlank
     private String name;
+
+    @Column(name = "surname")
+    @NotBlank
     private String surname;
+
+    @Column(name = "dob")
+    @NotBlank
+    @Range(min = 1900)
     private int dob;
 
     public Actor() {

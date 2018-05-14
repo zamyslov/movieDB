@@ -1,15 +1,31 @@
 package moviedb.model;
 
+import org.hibernate.validator.constraints.Range;
+
 import javax.persistence.*;
-import java.util.List;
+import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "movie", uniqueConstraints = {@UniqueConstraint(columnNames = "name", name = "movie_unique_name_idx")})
 public class Movie extends AbstractBaseEntity{
+
+    @Column(name = "name")
+    @NotBlank
     private String name;
+
+    @Column(name = "year")
+    @NotBlank
+    @Range(min = 1900)
     private int year;
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "actors_movies",
+            joinColumns = { @JoinColumn(name = "movie_id") },
+            inverseJoinColumns = { @JoinColumn(name = "actor_id") }
+    )
     private Set<Actor> cast;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "movie")
