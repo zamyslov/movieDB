@@ -1,22 +1,15 @@
 package moviedb.service.impl;
 
-import moviedb.controller.AuthorizedUser;
 import moviedb.model.Actor;
-import moviedb.model.User;
 import moviedb.repository.ActorRepository;
-import moviedb.repository.UserRepository;
 import moviedb.service.ActorService;
-import moviedb.service.UserService;
 import moviedb.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.util.List;
 
-import static moviedb.util.ValidationUtil.checkNotFound;
 import static moviedb.util.ValidationUtil.checkNotFoundWithId;
 
 @Service

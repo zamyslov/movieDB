@@ -12,19 +12,11 @@ import javax.persistence.*;
 @Access(AccessType.FIELD)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class AbstractBaseEntity implements Persistable<Integer> {
-    public static final String START_SEQ = "100000";
+    public static final int START_SEQ = 100000;
 
 
-    @GenericGenerator(
-            name = "global_seq",
-            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-            parameters = {
-                    @Parameter(name = "sequence_name", value = "global_seq"),
-                    @Parameter(name = "initial_value", value = START_SEQ),
-                    @Parameter(name = "increment_size", value = "1")
-            }
-    )
     @Id
+    @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = START_SEQ)
     @GeneratedValue(generator = "global_seq")
     protected Integer id;
 

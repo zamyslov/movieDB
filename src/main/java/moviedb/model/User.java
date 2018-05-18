@@ -1,14 +1,18 @@
 package moviedb.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Cache;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.EnumSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE, region = "users")
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "login", name = "users_unique_login_idx")})
 public class User extends AbstractBaseEntity {
     @Column(name = "login")
@@ -34,15 +38,23 @@ public class User extends AbstractBaseEntity {
     @JsonManagedReference(value = "votes")
     private Set<Vote> votes;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
             name = "user_movies",
-            joinColumns = { @JoinColumn(name = "user_id") },
-            inverseJoinColumns = { @JoinColumn(name = "movie_id") }
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "movie_id")}
     )
     private Set<Movie> favoriteMovies;
 
     public User() {
+    }
+
+    public User(Integer id, String login, String password, String name, Set<Role> roles) {
+        super(id);
+        this.login = login;
+        this.password = password;
+        this.name = name;
+        this.roles = roles;
     }
 
     public User(String login, String password, String name, Set<Role> roles) {
@@ -50,6 +62,10 @@ public class User extends AbstractBaseEntity {
         this.password = password;
         this.name = name;
         this.roles = roles;
+    }
+
+    public User(Integer id, String login, String password, String name, Role role, Role... roles) {
+        this(id, login, password, name, EnumSet.of(role, roles));
     }
 
     public String getLogin() {
