@@ -13,8 +13,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <spring.version>5.0.2.RELEASE</spring.version>
-        <spring-data-jpa.version>2.0.2.RELEASE</spring-data-jpa.version>
+        <spring.version>5.0.6.RELEASE</spring.version>
+        <spring-data-jpa.version>2.0.7.RELEASE</spring-data-jpa.version>
         <spring-security.version>5.0.0.RELEASE</spring-security.version>
         <jackson-json.version>2.9.3</jackson-json.version>
 
@@ -114,6 +114,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
@@ -198,6 +199,13 @@
             <version>1.2</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-server</artifactId>
+            <version>8.4.2</version>
+        </dependency>
+
+
         <!--JSON-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -264,7 +272,20 @@
             <version>${spring-security.version}</version>
         </dependency>
 
+
+
     </dependencies>
 
-    
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
 </project>

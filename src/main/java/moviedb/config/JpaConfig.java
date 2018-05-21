@@ -15,6 +15,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -31,6 +32,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 @PropertySource("classpath:/application.properties")
 @EnableCaching
+@EnableJpaRepositories(basePackages = {"moviedb"})
 public class JpaConfig {
 
     @Value("${spring.datasource.driverClassName}")
