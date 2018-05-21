@@ -2,8 +2,6 @@ package moviedb.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.Hibernate;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
@@ -13,7 +11,6 @@ import javax.persistence.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class AbstractBaseEntity implements Persistable<Integer> {
     public static final int START_SEQ = 100000;
-
 
     @Id
     @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = START_SEQ)

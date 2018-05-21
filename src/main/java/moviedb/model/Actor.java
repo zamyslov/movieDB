@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
 @Entity
-@Table(name = "actors", uniqueConstraints = {@UniqueConstraint(columnNames = "name, surname", name = "actors_unique_name_surname_idx")})
+@Table(name = "actors", uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "surname"}, name = "actors_unique_name_surname_idx")})
 public class Actor extends AbstractBaseEntity {
 
     @Column(name = "name")

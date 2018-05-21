@@ -8,8 +8,8 @@ import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
 @Entity
-@Table(name = "votes", uniqueConstraints = {@UniqueConstraint(columnNames = "user_id, movie_id", name = "votes_idx")})
-public class Vote {
+@Table(name = "votes", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "movie_id"}, name = "votes_idx")})
+public class Vote extends AbstractBaseEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     @JsonBackReference(value = "votes")
