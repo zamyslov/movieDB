@@ -28,6 +28,9 @@ public class Movie extends AbstractBaseEntity{
     )
     private Set<Actor> cast;
 
+    @ManyToMany(mappedBy = "favoriteMovies")
+    private Set<User> users;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "movie")
     private Set<Vote> votes;
 
@@ -39,6 +42,14 @@ public class Movie extends AbstractBaseEntity{
         this.year = year;
         this.cast = cast;
         this.votes = votes;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
     public String getName() {

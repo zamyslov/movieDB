@@ -2,12 +2,10 @@ package moviedb.model;
 
 import org.hibernate.validator.constraints.Range;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "actors", uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "surname"}, name = "actors_unique_name_surname_idx")})
@@ -25,6 +23,9 @@ public class Actor extends AbstractBaseEntity {
     @NotBlank
     @Range(min = 1900)
     private int dob;
+
+    @ManyToMany(mappedBy = "cast")
+    private Set<Movie> movies;
 
     public Actor() {
     }
@@ -57,6 +58,14 @@ public class Actor extends AbstractBaseEntity {
 
     public void setDob(int dob) {
         this.dob = dob;
+    }
+
+    public Set<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(Set<Movie> movies) {
+        this.movies = movies;
     }
 
     @Override

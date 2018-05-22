@@ -1,8 +1,8 @@
 package moviedb.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -34,11 +34,11 @@ public class User extends AbstractBaseEntity {
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     @JsonManagedReference(value = "votes")
     private Set<Vote> votes;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     @JoinTable(
             name = "user_movies",
             joinColumns = {@JoinColumn(name = "user_id")},

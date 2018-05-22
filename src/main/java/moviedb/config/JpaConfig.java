@@ -32,7 +32,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 @PropertySource("classpath:/application.properties")
 @EnableCaching
-@EnableJpaRepositories(basePackages = {"moviedb"})
+@EnableJpaRepositories(basePackages = {"moviedb"}, entityManagerFactoryRef = "configureEntityManagerFactory")
 public class JpaConfig {
 
     @Value("${spring.datasource.driverClassName}")
@@ -86,18 +86,18 @@ public class JpaConfig {
         return new JpaTransactionManager();
     }
 
-//    @Bean(name = "cacheManager")
-//    public CacheManager cacheManager() {
-//        return new EhCacheCacheManager(ehCacheCacheManager().getObject());
-//    }
-//
-//    @Bean
-//    public EhCacheManagerFactoryBean ehCacheCacheManager() {
-//        EhCacheManagerFactoryBean cmfb = new EhCacheManagerFactoryBean();
-//        cmfb.setConfigLocation(new ClassPathResource("ehcache.xml"));
-//        cmfb.setShared(true);
-//        return cmfb;
-//    }
+    @Bean(name = "cacheManager")
+    public CacheManager cacheManager() {
+        return new EhCacheCacheManager(ehCacheCacheManager().getObject());
+    }
+
+    @Bean
+    public EhCacheManagerFactoryBean ehCacheCacheManager() {
+        EhCacheManagerFactoryBean cmfb = new EhCacheManagerFactoryBean();
+        cmfb.setConfigLocation(new ClassPathResource("ehcache.xml"));
+        cmfb.setShared(true);
+        return cmfb;
+    }
 
     @Bean
     public MessageSource messageSource() {
