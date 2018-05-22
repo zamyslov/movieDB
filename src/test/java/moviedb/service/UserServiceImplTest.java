@@ -24,7 +24,7 @@ public class UserServiceImplTest extends AbstractServiceTest{
     @Test
     public void get() {
         User user = service.get(USER_ID);
-        assertMatch(user,USER);
+        assertMatch(user, USER);
     }
 
     @Test
