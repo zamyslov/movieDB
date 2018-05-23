@@ -4,6 +4,8 @@ import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
 
@@ -20,9 +22,8 @@ public class Actor extends AbstractBaseEntity {
     private String surname;
 
     @Column(name = "dob")
-    @NotBlank
-    @Range(min = 1900)
-    private int dob;
+    @NotNull
+    private LocalDate dob;
 
     @ManyToMany(mappedBy = "cast")
     private Set<Movie> movies;
@@ -30,7 +31,14 @@ public class Actor extends AbstractBaseEntity {
     public Actor() {
     }
 
-    public Actor(String name, String surname, int dob) {
+    public Actor(String name, String surname, LocalDate dob) {
+        this.name = name;
+        this.surname = surname;
+        this.dob = dob;
+    }
+
+    public Actor(Integer id, String name, String surname, LocalDate dob) {
+        super(id);
         this.name = name;
         this.surname = surname;
         this.dob = dob;
@@ -52,11 +60,11 @@ public class Actor extends AbstractBaseEntity {
         this.surname = surname;
     }
 
-    public int getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
-    public void setDob(int dob) {
+    public void setDob(LocalDate dob) {
         this.dob = dob;
     }
 
@@ -72,10 +80,11 @@ public class Actor extends AbstractBaseEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         Actor actor = (Actor) o;
-        return dob == actor.dob &&
-                Objects.equals(name, actor.name) &&
-                Objects.equals(surname, actor.surname);
+        return Objects.equals(name, actor.name) &&
+                Objects.equals(surname, actor.surname) &&
+                Objects.equals(dob, actor.dob);
     }
 
     @Override

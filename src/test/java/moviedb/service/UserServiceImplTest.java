@@ -12,7 +12,6 @@ import org.springframework.cache.CacheManager;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import java.util.EnumSet;
-import java.util.List;
 import java.util.Objects;
 
 import static moviedb.testdata.UserTestData.*;
@@ -34,8 +33,7 @@ public class UserServiceImplTest extends AbstractServiceTest {
     public void create() {
         User newUser = new User("usernew@ukr.net", "password", "UserNew", EnumSet.of(Role.ROLE_USER));
         service.create(newUser);
-        List<User> users = service.getAll();
-        assertMatch(users, ADMIN, USER1, USER2, USER3, USER, newUser);
+        assertMatch(service.getAll(), ADMIN, USER1, USER2, USER3, USER, newUser);
     }
 
     @Test(expected = DataIntegrityViolationException.class)
@@ -47,8 +45,7 @@ public class UserServiceImplTest extends AbstractServiceTest {
     @Test
     public void delete() {
         service.delete(USER_ID_3);
-        List<User> users = service.getAll();
-        assertMatch(users, ADMIN, USER1, USER2, USER);
+        assertMatch(service.getAll(), ADMIN, USER1, USER2, USER);
     }
 
     @Test(expected = NotFoundException.class)
@@ -58,8 +55,7 @@ public class UserServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void get() {
-        User user = service.get(USER_ID);
-        assertMatch(user, USER);
+        assertMatch(service.get(USER_ID), USER);
     }
 
     @Test(expected = NotFoundException.class)
@@ -69,8 +65,7 @@ public class UserServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void getByLogin() {
-        User user = service.getByLogin("user1@ukr.net");
-        assertMatch(user, USER1);
+        assertMatch(service.getByLogin("user1@ukr.net"), USER1);
     }
 
     @Test(expected = NotFoundException.class)
@@ -80,8 +75,7 @@ public class UserServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void getAll() {
-        List<User> users = service.getAll();
-        assertMatch(users, ADMIN, USER1, USER2, USER3, USER);
+        assertMatch(service.getAll(), ADMIN, USER1, USER2, USER3, USER);
     }
 
     @Test
@@ -89,8 +83,7 @@ public class UserServiceImplTest extends AbstractServiceTest {
         User user = service.getByLogin("user1@ukr.net");
         user.setName("Updated");
         service.update(user);
-        User updatedUser = service.getByLogin("user1@ukr.net");
-        assertMatch(user, updatedUser);
+        assertMatch(service.getByLogin("user1@ukr.net"), user);
     }
 
     @Test

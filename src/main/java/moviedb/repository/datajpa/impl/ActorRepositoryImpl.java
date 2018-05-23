@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public class ActorRepositoryImpl implements ActorRepository {
-    private static final Sort SORT_SURNAME_NAME = new Sort(Sort.Direction.ASC, "surname,name");
+    private static final Sort SORT_SURNAME_NAME = new Sort(Sort.Direction.ASC, "surname","name");
 
     @Autowired
     private CrudActorRepository crudRepository;

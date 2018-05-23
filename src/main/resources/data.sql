@@ -29,7 +29,7 @@ INSERT INTO movies (name, year) VALUES
   ('Iron Man', 2008), --100007
   ('Avengers', 2012); --100008
 
-INSERT INTO actors (name, surname, dob) VALUES
+INSERT INTO actors (surname, name, dob) VALUES
   ('DiCaprio', 'Leonardo', '1974-11-11'), --100009
   ('Winslet', 'Kate', '1975-10-05'), --100010
   ('Saldana', 'Zoe', '1978-06-19'), --100011
