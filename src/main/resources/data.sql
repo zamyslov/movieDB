@@ -9,17 +9,18 @@ DELETE FROM user_movies;
 ALTER SEQUENCE global_seq RESTART WITH 100000;
 
 INSERT INTO users (name, login, password) VALUES
-  ('User', 'user@yandex.ru', '$2a$10$DLVDKA7WrLvKwdcQy5HdjepOy74gIGQlkh159EqEys3bOtUE3aOHK'), --100000
-  ('User1', 'user1@yandex.ru', 'password'), --100001
-  ('User2', 'user2@yandex.ru', 'password'), --100002
-  ('User3', 'user3@yandex.ru', 'password'), --100003
-  ('Admin', 'admin@gmail.com', '$2a$10$TjHDJyLWPR5umEHZs4Vame7V98jz4FJvvk63uOXm6YF0s4PeJMCjy'); --100004
+  ('User', 'user@ukr.net', 'password'), --100000
+  ('User1', 'user1@ukr.net', 'password'), --100001
+  ('User2', 'user2@ukr.net', 'password'), --100002
+  ('User3', 'user3@ukr.net', 'password'), --100003
+  ('Admin', 'admin@gmail.com', 'adminpassword'); --100004
 
 INSERT INTO user_roles (role, user_id) VALUES
   ('ROLE_USER', 100000),
   ('ROLE_USER', 100001),
   ('ROLE_USER', 100002),
   ('ROLE_USER', 100003),
+  ('ROLE_USER', 100004),
   ('ROLE_ADMIN', 100004);
 
 INSERT INTO movies (name, year) VALUES

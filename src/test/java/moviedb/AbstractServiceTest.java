@@ -8,8 +8,10 @@ import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@Sql(scripts = "classpath:data.sql", config = @SqlConfig(encoding = "UTF-8"))
-@ContextConfiguration(classes=JpaConfig.class)
+@Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD,
+        scripts = "classpath:data.sql",
+        config = @SqlConfig(encoding = "UTF-8"))
+@ContextConfiguration(classes = JpaConfig.class)
 abstract public class AbstractServiceTest {
 
     //  Check root cause in JUnit: https://github.com/junit-team/junit4/pull/778
