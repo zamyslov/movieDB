@@ -1,6 +1,6 @@
 DELETE FROM user_roles;
 DELETE FROM users;
-DELETE FROM movies;
+DELETE FROM movie;
 DELETE FROM actors;
 DELETE FROM votes;
 DELETE FROM actors_movies;
@@ -23,7 +23,7 @@ INSERT INTO user_roles (role, user_id) VALUES
   ('ROLE_USER', 100004),
   ('ROLE_ADMIN', 100004);
 
-INSERT INTO movies (name, year) VALUES
+INSERT INTO movie (name, year) VALUES
   ('Titanic', 1997), --100005
   ('Avatar', 2009), --100006
   ('Iron Man', 2008), --100007

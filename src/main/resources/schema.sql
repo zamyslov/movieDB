@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS user_roles;
-DROP TABLE IF EXISTS movies;
+DROP TABLE IF EXISTS movie;
 DROP TABLE IF EXISTS actors;
 DROP TABLE IF EXISTS votes;
 DROP TABLE IF EXISTS actors_movies;
@@ -26,13 +26,13 @@ CREATE TABLE user_roles
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
-CREATE TABLE movies
+CREATE TABLE movie
 (
   id              INTEGER default global_seq.nextval primary key,
   name            VARCHAR                 NOT NULL,
   year            INTEGER                 NOT NULL,
 );
-CREATE UNIQUE INDEX movies_unique_name_idx ON movies (name);
+CREATE UNIQUE INDEX movies_unique_name_idx ON movie (name);
 
 CREATE TABLE actors
 (
@@ -49,7 +49,7 @@ CREATE TABLE actors_movies
   actor_id         INTEGER                 NOT NULL,
   movie_id         INTEGER                 NOT NULL,
   FOREIGN KEY (actor_id) REFERENCES actors (id) ON DELETE CASCADE,
-  FOREIGN KEY (movie_id) REFERENCES movies (id) ON DELETE CASCADE
+  FOREIGN KEY (movie_id) REFERENCES movie (id) ON DELETE CASCADE
 );
 
 CREATE TABLE user_movies
@@ -58,7 +58,7 @@ CREATE TABLE user_movies
   user_id         INTEGER                 NOT NULL,
   movie_id         INTEGER                 NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
-  FOREIGN KEY (movie_id) REFERENCES movies (id) ON DELETE CASCADE
+  FOREIGN KEY (movie_id) REFERENCES movie (id) ON DELETE CASCADE
 );
 
 CREATE TABLE votes
@@ -68,6 +68,6 @@ CREATE TABLE votes
   movie_id         INTEGER                 NOT NULL,
   mark             DOUBLE                  NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
-  FOREIGN KEY (movie_id) REFERENCES movies (id) ON DELETE CASCADE
+  FOREIGN KEY (movie_id) REFERENCES movie (id) ON DELETE CASCADE
 );
 CREATE UNIQUE INDEX votes_idx ON votes (user_id, movie_id);

@@ -1,5 +1,6 @@
 package moviedb.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
@@ -20,7 +21,7 @@ public class Movie extends AbstractBaseEntity{
     @Range(min = 1900)
     private int year;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
     @JoinTable(
             name = "actors_movies",
             joinColumns = { @JoinColumn(name = "movie_id") },
@@ -28,10 +29,11 @@ public class Movie extends AbstractBaseEntity{
     )
     private Set<Actor> cast;
 
-    @ManyToMany(mappedBy = "favoriteMovies")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "favoriteMovies")
     private Set<User> users;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "movie")
+    @JsonManagedReference(value = "movie")
     private Set<Vote> votes;
 
     public Movie() {
@@ -42,6 +44,12 @@ public class Movie extends AbstractBaseEntity{
         this.year = year;
         this.cast = cast;
         this.votes = votes;
+    }
+
+    public Movie(Integer id, String name, int year) {
+        super(id);
+        this.name = name;
+        this.year = year;
     }
 
     public Set<User> getUsers() {
@@ -97,8 +105,7 @@ public class Movie extends AbstractBaseEntity{
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(name, year, cast, votes);
+        return Objects.hash(name, year, cast);
     }
 
     @Override

@@ -17,7 +17,7 @@ public class Vote extends AbstractBaseEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "movie_id", referencedColumnName = "id", nullable = false)
-    @JsonBackReference(value = "votes")
+    @JsonBackReference(value = "movie")
     private Movie movie;
 
     @Column(name = "mark")
@@ -70,7 +70,6 @@ public class Vote extends AbstractBaseEntity {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(user, movie, mark);
     }
 
