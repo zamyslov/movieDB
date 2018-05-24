@@ -1,10 +1,16 @@
 package moviedb.testdata;
 
+import moviedb.model.Actor;
 import moviedb.model.Movie;
+import moviedb.model.User;
 
-import java.util.Arrays;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static moviedb.model.AbstractBaseEntity.START_SEQ;
+import static moviedb.testdata.ActorTestData.ACTOR2;
+import static moviedb.testdata.ActorTestData.ACTOR3;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MovieTestData {
@@ -13,10 +19,13 @@ public class MovieTestData {
     public static final int MOVIE_ID_2 = MOVIE_ID_1 + 1;
     public static final int MOVIE_ID_3 = MOVIE_ID_2 + 1;
 
+    public static final Set<Actor> CAST_MOVIE1 = Stream.of(ACTOR2, ACTOR3).collect(Collectors.toSet());
+
     public static final Movie MOVIE = new Movie(MOVIE_ID, "Titanic", 1997);
-    public static final Movie MOVIE1 = new Movie(MOVIE_ID_1, "Avatar", 2009);
+    public static final Movie MOVIE1 = new Movie(MOVIE_ID_1, "Avatar", 2009, CAST_MOVIE1);
     public static final Movie MOVIE2 = new Movie(MOVIE_ID_2, "Iron Man", 2008);
     public static final Movie MOVIE3 = new Movie(MOVIE_ID_3, "Avengers", 2012);
+
 
     public static void assertMatch(Movie actual, Movie expected) {
         assertThat(actual).isEqualToIgnoringGivenFields(expected, "users", "cast", "votes");

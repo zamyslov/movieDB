@@ -5,27 +5,28 @@ import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "movie", uniqueConstraints = {@UniqueConstraint(columnNames = "name", name = "movie_unique_name_idx")})
-public class Movie extends AbstractBaseEntity{
+public class Movie extends AbstractBaseEntity {
 
     @Column(name = "name")
     @NotBlank
     private String name;
 
     @Column(name = "year")
-    @NotBlank
+    @NotNull
     @Range(min = 1900)
     private int year;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     @JoinTable(
             name = "actors_movies",
-            joinColumns = { @JoinColumn(name = "movie_id") },
-            inverseJoinColumns = { @JoinColumn(name = "actor_id") }
+            joinColumns = {@JoinColumn(name = "movie_id")},
+            inverseJoinColumns = {@JoinColumn(name = "actor_id")}
     )
     private Set<Actor> cast;
 
@@ -39,17 +40,26 @@ public class Movie extends AbstractBaseEntity{
     public Movie() {
     }
 
-    public Movie(String name, int year, Set<Actor> cast, Set<Vote> votes) {
+    public Movie(String name, int year) {
         this.name = name;
         this.year = year;
-        this.cast = cast;
-        this.votes = votes;
     }
 
     public Movie(Integer id, String name, int year) {
         super(id);
         this.name = name;
         this.year = year;
+    }
+
+    public Movie(Integer id, String name, int year, Set<Actor> cast) {
+        this(id, name, year);
+        this.cast = cast;
+    }
+
+    public Movie(String name, int year, Set<Actor> cast, Set<Vote> votes) {
+        this(name, year);
+        this.cast = cast;
+        this.votes = votes;
     }
 
     public Set<User> getUsers() {
@@ -105,7 +115,7 @@ public class Movie extends AbstractBaseEntity{
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, year, cast);
+        return Objects.hash(name, year);
     }
 
     @Override

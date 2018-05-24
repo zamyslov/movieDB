@@ -124,9 +124,7 @@ public class User extends AbstractBaseEntity {
         return Objects.equals(login, user.login) &&
                 Objects.equals(password, user.password) &&
                 Objects.equals(roles, user.roles) &&
-                Objects.equals(votes, user.votes) &&
-                Objects.equals(name, user.name) &&
-                Objects.equals(favoriteMovies, user.favoriteMovies);
+                Objects.equals(name, user.name);
     }
 
     @Override
