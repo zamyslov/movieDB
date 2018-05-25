@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -21,14 +21,21 @@ public class Vote extends AbstractBaseEntity {
     private Movie movie;
 
     @Column(name = "mark")
-    @NotBlank
+    @NotNull
     @Range(min = 0, max = 5)
-    private int mark;
+    private double mark;
 
     public Vote() {
     }
 
-    public Vote(User user, Movie movie, int mark) {
+    public Vote(User user, Movie movie, double mark) {
+        this.user = user;
+        this.movie = movie;
+        this.mark = mark;
+    }
+
+    public Vote(Integer id, User user, Movie movie, double mark) {
+        super(id);
         this.user = user;
         this.movie = movie;
         this.mark = mark;
@@ -50,11 +57,11 @@ public class Vote extends AbstractBaseEntity {
         this.movie = movie;
     }
 
-    public int getMark() {
+    public double getMark() {
         return mark;
     }
 
-    public void setMark(int mark) {
+    public void setMark(double mark) {
         this.mark = mark;
     }
 
@@ -63,9 +70,7 @@ public class Vote extends AbstractBaseEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Vote vote = (Vote) o;
-        return mark == vote.mark &&
-                Objects.equals(user, vote.user) &&
-                Objects.equals(movie, vote.movie);
+        return Objects.equals(id, vote.id);
     }
 
     @Override
@@ -75,7 +80,7 @@ public class Vote extends AbstractBaseEntity {
 
     @Override
     public String toString() {
-        return "Vote{" +
+        return "Vote"+id+"{" +
                 "user=" + user +
                 ", movie=" + movie +
                 ", mark=" + mark +

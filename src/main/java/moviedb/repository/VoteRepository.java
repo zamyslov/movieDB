@@ -1,6 +1,5 @@
 package moviedb.repository;
 
-import moviedb.model.Movie;
 import moviedb.model.Vote;
 
 import java.util.List;
