@@ -14,7 +14,18 @@ import org.springframework.dao.DataIntegrityViolationException;
 import java.util.EnumSet;
 import java.util.Objects;
 
-import static moviedb.testdata.UserTestData.*;
+import static moviedb.testdata.MovieTestData.assertMatch;
+import static moviedb.testdata.UserTestData.ADMIN;
+import static moviedb.testdata.UserTestData.FAVORITE_MOVIES;
+import static moviedb.testdata.UserTestData.USER;
+import static moviedb.testdata.UserTestData.USER1;
+import static moviedb.testdata.UserTestData.USER2;
+import static moviedb.testdata.UserTestData.USER3;
+import static moviedb.testdata.UserTestData.USER_ID;
+import static moviedb.testdata.UserTestData.USER_ID_3;
+import static moviedb.testdata.UserTestData.VOTES;
+import static moviedb.testdata.UserTestData.assertMatch;
+import static moviedb.testdata.VoteTestData.assertMatch;
 
 public class UserServiceImplTest extends AbstractServiceTest {
 
@@ -87,11 +98,15 @@ public class UserServiceImplTest extends AbstractServiceTest {
     }
 
     @Test
-    public void getWithVotes() {
+    public void getVotes() {
+        User user = service.get(USER_ID);
+        assertMatch(user.getVotes(), VOTES);
     }
 
     @Test
-    public void getWithFavoriteMovies() {
+    public void getFavoriteMovies() {
+        User user = service.get(USER_ID);
+        assertMatch(user.getFavoriteMovies(), FAVORITE_MOVIES);
     }
 
 }

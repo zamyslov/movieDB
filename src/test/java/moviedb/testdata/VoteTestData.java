@@ -11,14 +11,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class VoteTestData {
-    public static final int VOTE_ID = START_SEQ + 16;
-    public static final int VOTE_ID_1 = VOTE_ID + 1;
-    public static final int VOTE_ID_2 = VOTE_ID_1 + 1;
-    public static final int VOTE_ID_3 = VOTE_ID_2 + 1;
-    public static final int VOTE_ID_4 = VOTE_ID_3 + 1;
-    public static final int VOTE_ID_5 = VOTE_ID_4 + 1;
-    public static final int VOTE_ID_6 = VOTE_ID_5 + 1;
-    public static final int VOTE_ID_7 = VOTE_ID_6 + 1;
+    private static final int VOTE_ID = START_SEQ + 16;
+    private static final int VOTE_ID_1 = VOTE_ID + 1;
+    private static final int VOTE_ID_2 = VOTE_ID_1 + 1;
+    private static final int VOTE_ID_3 = VOTE_ID_2 + 1;
+    private static final int VOTE_ID_4 = VOTE_ID_3 + 1;
+    private static final int VOTE_ID_5 = VOTE_ID_4 + 1;
+    private static final int VOTE_ID_6 = VOTE_ID_5 + 1;
+    private static final int VOTE_ID_7 = VOTE_ID_6 + 1;
 
     public static final Vote VOTE = new Vote(VOTE_ID, USER, MOVIE, 5);
     public static final Vote VOTE1 = new Vote(VOTE_ID_1, USER, MOVIE1, 5);

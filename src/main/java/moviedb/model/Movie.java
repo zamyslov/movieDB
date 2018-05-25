@@ -33,7 +33,7 @@ public class Movie extends AbstractBaseEntity {
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "favoriteMovies")
     private Set<User> users;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "movie")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "movie")
     @JsonManagedReference(value = "movie")
     private Set<Vote> votes;
 

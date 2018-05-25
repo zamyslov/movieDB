@@ -64,6 +64,12 @@ public class User extends AbstractBaseEntity {
         this.roles = roles;
     }
 
+    public User(Integer id, String login, String password, String name, Set<Role> roles, Set<Movie> movies, Set<Vote> votes) {
+        this(id, login, password, name, roles);
+        this.favoriteMovies = movies;
+        this.votes = votes;
+    }
+
     public User(Integer id, String login, String password, String name, Role role, Role... roles) {
         this(id, login, password, name, EnumSet.of(role, roles));
     }

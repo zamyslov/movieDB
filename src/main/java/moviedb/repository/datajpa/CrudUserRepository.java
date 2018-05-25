@@ -31,12 +31,12 @@ public interface CrudUserRepository extends JpaRepository<User, Integer> {
     @Override
     List<User> findAll(Sort sort);
 
-    @EntityGraph(attributePaths = {"votes"}, type = EntityGraph.EntityGraphType.LOAD)
-    @Query("SELECT u FROM User u WHERE u.id=?1")
-    User getWithVotes(int id);
-
-    @EntityGraph(attributePaths = {"movies"}, type = EntityGraph.EntityGraphType.LOAD)
-    @Query("SELECT u FROM User u WHERE u.id=?1")
-    User getWithFavoriteMovies(int id);
+//    @EntityGraph(attributePaths = {"votes"}, type = EntityGraph.EntityGraphType.LOAD)
+//    @Query("SELECT u FROM User u WHERE u.id=?1")
+//    User getWithVotes(int id);
+//
+//    @EntityGraph(attributePaths = {"movies"}, type = EntityGraph.EntityGraphType.LOAD)
+//    @Query("SELECT u FROM User u WHERE u.id=?1")
+//    User getWithFavoriteMovies(int id);
 
 }

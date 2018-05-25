@@ -61,16 +61,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User getWithVotes(int id) throws NotFoundException {
-        return checkNotFoundWithId(repository.getWithVotes(id), id);
-    }
-
-    @Override
-    public User getWithFavoriteMovies(int id) {
-        return checkNotFoundWithId(repository.getWithFavoriteMovies(id), id);
-    }
-
-    @Override
     public AuthorizedUser loadUserByUsername(String login) throws UsernameNotFoundException {
         User user = repository.getByLogin(login.toLowerCase());
         if (user == null) {

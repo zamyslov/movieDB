@@ -16,8 +16,11 @@ public interface CrudVoteRepository extends JpaRepository<Vote, Integer> {
     @Query("DELETE FROM Vote v WHERE v.movie.id=:movie_id AND v.user.id=:user_id")
     int delete(@Param("movie_id") int movie_id, @Param("user_id") int user_id);
 
-    @Query("SELECT v FROM Vote v")
-    List<Vote> getAll();
+    @Override
+    List<Vote> findAll();
+
+    @Query("SELECT v FROM Vote v WHERE v.user.id=:user_id")
+    List<Vote> getByUser(@Param("user_id") int user_id);
 
     @Override
     @Transactional

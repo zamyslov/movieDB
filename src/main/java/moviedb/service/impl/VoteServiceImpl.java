@@ -37,4 +37,8 @@ public class VoteServiceImpl implements VoteService {
         checkNotFound(repository.delete(movie_id, user_id), "movie:" + movie_id + "user:" + user_id);
     }
 
+    @Override
+    public List<Vote> getByUser(int user_id) {
+        return repository.getByUser(user_id);
+    }
 }

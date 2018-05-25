@@ -21,7 +21,7 @@ public class VoteRepositoryImpl implements VoteRepository {
 
     @Override
     public List<Vote> getAll() {
-        return crudRepository.getAll();
+        return crudRepository.findAll();
     }
 
     @Override
@@ -29,4 +29,8 @@ public class VoteRepositoryImpl implements VoteRepository {
         return crudRepository.delete(movie_id, user_id) != 0;
     }
 
+    @Override
+    public List<Vote> getByUser(int user_id) {
+        return crudRepository.getByUser(user_id);
+    }
 }

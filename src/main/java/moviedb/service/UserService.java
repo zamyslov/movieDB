@@ -19,8 +19,4 @@ public interface UserService {
 
     List<User> getAll();
 
-    User getWithVotes(int id);
-
-    User getWithFavoriteMovies(int id);
-
 }

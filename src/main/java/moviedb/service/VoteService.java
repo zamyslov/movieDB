@@ -14,4 +14,6 @@ public interface VoteService {
 
     void delete(int movie_id, int user_id);
 
+    List<Vote> getByUser(int user_id);
+
 }

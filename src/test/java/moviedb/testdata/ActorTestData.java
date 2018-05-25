@@ -9,13 +9,13 @@ import static moviedb.model.AbstractBaseEntity.START_SEQ;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ActorTestData {
-    public static final int ACTOR_ID = START_SEQ + 9;
+    private static final int ACTOR_ID = START_SEQ + 9;
     public static final int ACTOR_ID_1 = ACTOR_ID + 1;
-    public static final int ACTOR_ID_2 = ACTOR_ID_1 + 1;
-    public static final int ACTOR_ID_3 = ACTOR_ID_2 + 1;
-    public static final int ACTOR_ID_4 = ACTOR_ID_3 + 1;
-    public static final int ACTOR_ID_5 = ACTOR_ID_4 + 1;
-    public static final int ACTOR_ID_6 = ACTOR_ID_5 + 1;
+    private static final int ACTOR_ID_2 = ACTOR_ID_1 + 1;
+    private static final int ACTOR_ID_3 = ACTOR_ID_2 + 1;
+    private static final int ACTOR_ID_4 = ACTOR_ID_3 + 1;
+    private static final int ACTOR_ID_5 = ACTOR_ID_4 + 1;
+    private static final int ACTOR_ID_6 = ACTOR_ID_5 + 1;
 
     public static final Actor ACTOR = new Actor(ACTOR_ID, "Leonardo", "DiCaprio", LocalDate.of(1974, 11, 11));
     public static final Actor ACTOR1 = new Actor(ACTOR_ID_1, "Kate", "Winslet", LocalDate.of(1975, 10, 5));

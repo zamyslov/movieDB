@@ -3,6 +3,7 @@ package moviedb.service;
 import moviedb.AbstractServiceTest;
 import moviedb.model.Vote;
 import moviedb.service.impl.VoteServiceImpl;
+import moviedb.util.exception.NotFoundException;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -33,4 +34,16 @@ public class VoteServiceImplTest extends AbstractServiceTest {
         service.delete(MOVIE.getId(), USER.getId());
         assertMatch(service.getAll(), VOTE1, VOTE2, VOTE3, VOTE4, VOTE5, VOTE6, VOTE7);
     }
+
+    @Test(expected = NotFoundException.class)
+    public void deleteNotFound() {
+        service.delete(0,0);
+    }
+
+    @Test
+    @SuppressWarnings("ConstantConditions")
+    public void getByUser() {
+        assertMatch(service.getByUser(USER.getId()), VOTE, VOTE1, VOTE2);
+    }
+
 }

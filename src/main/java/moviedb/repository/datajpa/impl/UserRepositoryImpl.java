@@ -40,9 +40,9 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User getByLogin(String login) { return crudRepository.getByLogin(login).orElse(null); }
 
-    @Override
-    public User getWithVotes(int id) { return crudRepository.getWithVotes(id); }
-
-    @Override
-    public User getWithFavoriteMovies(int id) { return crudRepository.getWithFavoriteMovies(id); }
+//    @Override
+//    public User getWithVotes(int id) { return crudRepository.getWithVotes(id); }
+//
+//    @Override
+//    public User getWithFavoriteMovies(int id) { return crudRepository.getWithFavoriteMovies(id); }
 }

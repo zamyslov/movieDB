@@ -18,8 +18,8 @@ public interface UserRepository {
 
     List<User> getAll();
 
-    User getWithVotes(int id);
-
-    User getWithFavoriteMovies(int id);
+//    User getWithVotes(int id);
+//
+//    User getWithFavoriteMovies(int id);
 
 }

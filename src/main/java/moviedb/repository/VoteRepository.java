@@ -9,6 +9,8 @@ public interface VoteRepository {
 
     List<Vote> getAll();
 
+    List<Vote> getByUser(int user_id);
+
     // false if not found
     boolean delete(int movie_id, int user_id);
 }
