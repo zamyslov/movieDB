@@ -32,7 +32,6 @@ public interface CrudMovieRepository extends JpaRepository<Movie, Integer> {
     @Query("SELECT u FROM Movie u WHERE u.id=?1")
     Movie getWithVotes(int id);
 
-    @EntityGraph(attributePaths = {"votes"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT avg(mark) FROM Vote v WHERE v.movie.id=?1")
     double getAverageMark(int id);
 }

@@ -15,6 +15,8 @@ import static moviedb.testdata.ActorTestData.*;
 import static moviedb.testdata.ActorTestData.assertMatch;
 import static moviedb.testdata.MovieTestData.*;
 import static moviedb.testdata.MovieTestData.assertMatch;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 public class MovieServiceImplTest extends AbstractServiceTest {
 
@@ -81,5 +83,6 @@ public class MovieServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void getAverageMark() {
+        assertEquals(service.getAverageMark(MOVIE_ID), 4.25, 0.01);
     }
 }
