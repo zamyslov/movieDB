@@ -69,17 +69,17 @@ public class MovieServiceImplTest extends AbstractServiceTest {
         assertMatch(service.get(MOVIE_ID_1), movie);
     }
 
-    @Test
-    public void addActor() {
-        service.addActor(MOVIE1, ACTOR4);
-        assertMatch(MOVIE1.getCast(), ACTOR3, ACTOR4, ACTOR2);
-    }
-
-    @Test
-    public void deleteActor() {
-        service.deleteActor(MOVIE1, ACTOR2);
-        assertMatch(MOVIE1.getCast(), ACTOR3);
-    }
+//    @Test
+//    public void addActor() {
+//        service.addActor(MOVIE1, ACTOR4);
+//        assertMatch(MOVIE1.getCast(), ACTOR3, ACTOR4, ACTOR2);
+//    }
+//
+//    @Test
+//    public void deleteActor() {
+//        service.deleteActor(MOVIE1, ACTOR2);
+//        assertMatch(MOVIE1.getCast(), ACTOR3);
+//    }
 
     @Test
     public void getAverageMark() {

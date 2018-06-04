@@ -3,7 +3,6 @@ package moviedb.service;
 
 import moviedb.model.Vote;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public interface VoteService {
@@ -14,6 +13,6 @@ public interface VoteService {
 
     void delete(int movie_id, int user_id);
 
-    List<Vote> getByUser(int user_id);
+    List<Vote> getByUser();
 
 }

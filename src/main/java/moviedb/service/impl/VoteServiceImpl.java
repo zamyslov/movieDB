@@ -1,5 +1,6 @@
 package moviedb.service.impl;
 
+import moviedb.controller.AuthorizedUser;
 import moviedb.model.Vote;
 import moviedb.repository.VoteRepository;
 import moviedb.service.VoteService;
@@ -38,7 +39,7 @@ public class VoteServiceImpl implements VoteService {
     }
 
     @Override
-    public List<Vote> getByUser(int user_id) {
-        return repository.getByUser(user_id);
+    public List<Vote> getByUser() {
+        return repository.getByUser(AuthorizedUser.id());
     }
 }
