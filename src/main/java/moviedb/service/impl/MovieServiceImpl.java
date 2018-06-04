@@ -1,6 +1,5 @@
 package moviedb.service.impl;
 
-import moviedb.model.Actor;
 import moviedb.model.Movie;
 import moviedb.repository.MovieRepository;
 import moviedb.service.MovieService;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.util.List;
-import java.util.Set;
 
 import static moviedb.util.ValidationUtil.checkNotFoundWithId;
 
@@ -52,19 +50,19 @@ public class MovieServiceImpl implements MovieService {
         checkNotFoundWithId(repository.save(movie), movie.getId());
     }
 
-    @Override
-    public void addActor(Movie movie, Actor actor) {
-        Set<Actor> cast = movie.getCast();
-        cast.add(actor);
-        movie.setCast(cast);
-    }
-
-    @Override
-    public void deleteActor(Movie movie, Actor actor) {
-        Set<Actor> cast = movie.getCast();
-        cast.remove(actor);
-        movie.setCast(cast);
-    }
+//    @Override
+//    public void addActor(Movie movie, Actor actor) {
+//        Set<Actor> cast = movie.getCast();
+//        cast.add(actor);
+//        movie.setCast(cast);
+//    }
+//
+//    @Override
+//    public void deleteActor(Movie movie, Actor actor) {
+//        Set<Actor> cast = movie.getCast();
+//        cast.remove(actor);
+//        movie.setCast(cast);
+//    }
 
     @Override
     public double getAverageMark(int id) {

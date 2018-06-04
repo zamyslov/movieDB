@@ -1,7 +1,6 @@
 package moviedb.service;
 
 import javassist.NotFoundException;
-import moviedb.model.Actor;
 import moviedb.model.Movie;
 
 import java.util.List;
@@ -16,9 +15,9 @@ public interface MovieService {
 
     void update(Movie movie);
 
-    void addActor(Movie movie, Actor actor);
-
-    void deleteActor(Movie movie, Actor actor);
+//    void addActor(Movie movie, Actor actor);
+//
+//    void deleteActor(Movie movie, Actor actor);
 
     List<Movie> getAll();
 
