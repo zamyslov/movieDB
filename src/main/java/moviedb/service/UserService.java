@@ -13,8 +13,6 @@ public interface UserService {
 
     User get(int id) throws NotFoundException;
 
-    User getByLogin(String login) throws NotFoundException;
-
     void update(User user);
 
     List<User> getAll();

@@ -43,12 +43,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User getByLogin(String login) throws NotFoundException {
-        Assert.notNull(login, "login must not be null");
-        return checkNotFound(repository.getByLogin(login), "login=" + login);
-    }
-
-    @Override
     public List<User> getAll() {
         return repository.getAll();
     }
