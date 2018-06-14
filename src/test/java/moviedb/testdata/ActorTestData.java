@@ -9,7 +9,7 @@ import static moviedb.model.AbstractBaseEntity.START_SEQ;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ActorTestData {
-    private static final int ACTOR_ID = START_SEQ + 9;
+    public static final int ACTOR_ID = START_SEQ + 9;
     public static final int ACTOR_ID_1 = ACTOR_ID + 1;
     private static final int ACTOR_ID_2 = ACTOR_ID_1 + 1;
     private static final int ACTOR_ID_3 = ACTOR_ID_2 + 1;

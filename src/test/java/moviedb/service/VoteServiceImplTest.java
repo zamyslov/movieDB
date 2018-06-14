@@ -43,7 +43,7 @@ public class VoteServiceImplTest extends AbstractServiceTest {
     @Test
     @SuppressWarnings("ConstantConditions")
     public void getByUser() {
-        assertMatch(service.getByUser(USER.getId()), VOTE, VOTE1, VOTE2);
+        assertMatch(service.getByUser(), VOTE, VOTE1, VOTE2);
     }
 
 }

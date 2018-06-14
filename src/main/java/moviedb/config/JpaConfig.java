@@ -16,24 +16,34 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.sql.DataSource;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+
+import static moviedb.util.json.JacksonObjectMapper.getMapper;
 
 @Configuration
 @ComponentScan(basePackages = {"moviedb"})
 @EnableTransactionManagement
 @PropertySource("classpath:/application.properties")
 @EnableCaching
+@EnableWebMvc
 @EnableJpaRepositories(basePackages = {"moviedb"}, entityManagerFactoryRef = "configureEntityManagerFactory")
-public class JpaConfig {
+public class JpaConfig implements WebMvcConfigurer {
 
     @Value("${spring.datasource.driverClassName}")
     private String driver;
@@ -107,16 +117,17 @@ public class JpaConfig {
         return messageSource;
     }
 
-//    @Bean
-//    public MappingJackson2HttpMessageConverter jackson2HttpMessageConverter() {
-//        return new MappingJackson2HttpMessageConverter(getMapper());
-//    }
-//
-//    @Override
-//    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-//        MappingJackson2HttpMessageConverter converter = jackson2HttpMessageConverter();
-//        converter.setDefaultCharset(StandardCharsets.UTF_8);
-//        converters.add(converter);
+    @Bean
+    public MappingJackson2HttpMessageConverter jackson2HttpMessageConverter() {
+        return new MappingJackson2HttpMessageConverter(getMapper());
+    }
+
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        MappingJackson2HttpMessageConverter converter = jackson2HttpMessageConverter();
+        converter.setDefaultCharset(StandardCharsets.UTF_8);
+        converters.add(converter);
+        WebMvcConfigurer.super.configureMessageConverters(converters);
 //        super.configureMessageConverters(converters);
-//    }
+    }
 }
