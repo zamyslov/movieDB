@@ -13,7 +13,7 @@ public class ActorTestData {
     public static final int ACTOR_ID_1 = ACTOR_ID + 1;
     private static final int ACTOR_ID_2 = ACTOR_ID_1 + 1;
     private static final int ACTOR_ID_3 = ACTOR_ID_2 + 1;
-    private static final int ACTOR_ID_4 = ACTOR_ID_3 + 1;
+    public static final int ACTOR_ID_4 = ACTOR_ID_3 + 1;
     private static final int ACTOR_ID_5 = ACTOR_ID_4 + 1;
     private static final int ACTOR_ID_6 = ACTOR_ID_5 + 1;
 

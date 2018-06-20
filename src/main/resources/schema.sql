@@ -12,7 +12,7 @@ CREATE SEQUENCE global_seq START WITH 100000;
 CREATE TABLE users
 (
   id               INTEGER default global_seq.nextval primary key,
-  name            VARCHAR                 NOT NULL,
+  name             VARCHAR                 NOT NULL,
   login            VARCHAR                 NOT NULL,
   password         VARCHAR(60)             NOT NULL,
 );
