@@ -68,16 +68,15 @@ public class ExceptionInfoHandler {
     }
 
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)  // 422
-    @ExceptionHandler({BindException.class, MethodArgumentNotValidException.class})
+    @ExceptionHandler({BindException.class, MethodArgumentNotValidException.class, NotFoundException.class})
     public ErrorInfo bindValidationError(HttpServletRequest req, Exception e) {
-        BindingResult result = e instanceof BindException ?
-                ((BindException) e).getBindingResult() : ((MethodArgumentNotValidException) e).getBindingResult();
-
-        String[] details = result.getFieldErrors().stream()
-                .map(fe -> messageUtil.getMessage(fe))
-                .toArray(String[]::new);
-
-        return logAndGetErrorInfo(req, e, false, VALIDATION_ERROR, details);
+        ErrorType errorType;
+        if (e instanceof NotFoundException) {
+            errorType = DATA_NOT_FOUND;
+        }else {
+            errorType = VALIDATION_ERROR;
+        }
+        return logAndGetErrorInfo(req, e, false, errorType, e.getLocalizedMessage());
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

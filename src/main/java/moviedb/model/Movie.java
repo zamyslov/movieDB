@@ -30,7 +30,7 @@ public class Movie extends AbstractBaseEntity {
     )
     private Set<Actor> cast;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "favoriteMovies")
+    @ManyToMany(mappedBy = "favoriteMovies")
     private Set<User> users;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "movie")

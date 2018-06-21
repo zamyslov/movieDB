@@ -111,7 +111,7 @@ public class JpaConfig implements WebMvcConfigurer {
     @Bean
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("classpath:*".concat("messages/app"));
+        messageSource.setBasename("file:///e:/Work/movieDB/messages/app");
         messageSource.setCacheSeconds(10); //reload messages every 10 seconds
         messageSource.setDefaultEncoding("UTF-8");
         messageSource.setFallbackToSystemLocale(false);
