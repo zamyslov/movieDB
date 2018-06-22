@@ -19,7 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = VoteRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class VoteRestController {
-    static final String REST_URL = "/rest/vote";
+    public static final String REST_URL = "/rest/vote";
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired

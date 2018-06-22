@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = UserMovieRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserMovieRestController {
-    static final String REST_URL = "/rest/user/movies";
+    public static final String REST_URL = "/rest/user/movies";
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired

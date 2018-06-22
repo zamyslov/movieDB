@@ -18,7 +18,7 @@ import java.net.URI;
 @RestController
 @RequestMapping(value = AdminMovieRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdminMovieRestController {
-    static final String REST_URL = "/rest/admin/movies";
+    public static final String REST_URL = "/rest/admin/movies";
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired

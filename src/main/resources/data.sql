@@ -9,11 +9,11 @@ DELETE FROM user_movies;
 ALTER SEQUENCE global_seq RESTART WITH 100000;
 
 INSERT INTO users (name, login, password) VALUES
-  ('User', 'user@ukr.net', 'password'), --100000
-  ('User1', 'user1@ukr.net', 'password'), --100001
-  ('User2', 'user2@ukr.net', 'password'), --100002
-  ('User3', 'user3@ukr.net', 'password'), --100003
-  ('Admin', 'admin@gmail.com', 'adminpassword'); --100004
+  ('User', 'user@ukr.net', '{noop}password'), --100000
+  ('User1', 'user1@ukr.net', '{noop}password'), --100001
+  ('User2', 'user2@ukr.net', '{noop}password'), --100002
+  ('User3', 'user3@ukr.net', '{noop}password'), --100003
+  ('Admin', 'admin@gmail.com', '{noop}adminpassword'); --100004
 
 INSERT INTO user_roles (role, user_id) VALUES
   ('ROLE_USER', 100000),

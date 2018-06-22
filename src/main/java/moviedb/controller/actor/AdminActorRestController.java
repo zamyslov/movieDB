@@ -19,7 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = AdminActorRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdminActorRestController {
-    static final String REST_URL = "/rest/admin/actors";
+    public static final String REST_URL = "/rest/admin/actors";
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired

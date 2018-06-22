@@ -1,10 +1,12 @@
 package moviedb.controller;
 
 import moviedb.config.JpaConfig;
+import moviedb.config.SpringSecurityConfig;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
+import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
@@ -20,7 +22,7 @@ import javax.annotation.PostConstruct;
 @RunWith(SpringJUnit4ClassRunner.class)
 @Sql(scripts = "classpath:data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD,
         config = @SqlConfig(encoding = "UTF-8"))
-@ContextConfiguration(classes = JpaConfig.class)
+@ContextConfiguration(classes = {JpaConfig.class, SpringSecurityConfig.class})
 @WebAppConfiguration
 abstract public class AbstractControllerTest {
 
@@ -39,11 +41,15 @@ abstract public class AbstractControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
+    @Autowired
+    private FilterChainProxy filterChainProxy;
+
     @PostConstruct
     private void postConstruct() {
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(webApplicationContext)
                 .addFilter(CHARACTER_ENCODING_FILTER)
+                .addFilters(filterChainProxy)
                 .build();
     }
 

@@ -8,10 +8,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.io.ClassPathResource;
@@ -36,6 +33,7 @@ import java.util.Properties;
 import static moviedb.util.json.JacksonObjectMapper.getMapper;
 
 @Configuration
+@Import({SpringSecurityConfig.class})
 @ComponentScan(basePackages = {"moviedb"})
 @EnableTransactionManagement
 @PropertySource("classpath:/application.properties")
