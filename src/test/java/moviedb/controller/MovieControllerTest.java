@@ -107,7 +107,7 @@ public class MovieControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    public void testCreateInvalid() throws Exception {
+    public void testCreateDuplicate() throws Exception {
         Movie created = new Movie("Avatar", 2018);
         mockMvc.perform(post(ADMIN_REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)

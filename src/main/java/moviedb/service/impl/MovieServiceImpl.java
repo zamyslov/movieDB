@@ -34,7 +34,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Movie get(int id) throws NotFoundException {
+    public Movie get(int id) {
         return checkNotFoundWithId(repository.get(id), id);
     }
 

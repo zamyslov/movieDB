@@ -106,7 +106,7 @@ public class ActorControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    public void testCreateInvalid() throws Exception {
+    public void testCreateDuplicate() throws Exception {
         Actor created = new Actor("Kate", "Winslet", LocalDate.of(2018, 1, 1));
         mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)

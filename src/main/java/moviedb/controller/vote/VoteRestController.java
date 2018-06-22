@@ -2,6 +2,7 @@ package moviedb.controller.vote;
 
 import moviedb.controller.AuthorizedUser;
 import moviedb.model.Vote;
+import moviedb.service.MovieService;
 import moviedb.service.VoteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -25,6 +25,9 @@ public class VoteRestController {
     @Autowired
     private VoteService service;
 
+    @Autowired
+    private MovieService serviceMovie;
+
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") int movie_id) {
@@ -32,9 +35,10 @@ public class VoteRestController {
         service.delete(movie_id, AuthorizedUser.id());
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Vote> create(@Validated @RequestBody Vote vote) {
-        log.info("create for movie id {} and user id {}", vote.getMovie().getId(), AuthorizedUser.id());
+    @PostMapping
+    public ResponseEntity<Vote> create(@RequestParam("movie_id") int movie_id, @RequestParam("mark") int mark) {
+        Vote vote = new Vote(AuthorizedUser.get().getUser(), serviceMovie.get(movie_id), mark);
+        log.info("create vote for movie {} with mark {} from {}", vote);
         Vote created = service.create(vote);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")

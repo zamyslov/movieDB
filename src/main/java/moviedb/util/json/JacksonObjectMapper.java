@@ -26,9 +26,6 @@ public class JacksonObjectMapper extends ObjectMapper {
         configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-
-//        setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE);
-//        setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
 

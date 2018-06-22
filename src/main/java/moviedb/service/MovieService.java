@@ -11,7 +11,7 @@ public interface MovieService {
 
     void delete(int id) throws NotFoundException;
 
-    Movie get(int id) throws NotFoundException;
+    Movie get(int id);
 
     void update(Movie movie);
 

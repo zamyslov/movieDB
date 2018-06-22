@@ -1,27 +1,21 @@
 package moviedb.controller;
 
 import moviedb.controller.vote.VoteRestController;
-import moviedb.model.Actor;
+import moviedb.model.Vote;
 import moviedb.service.VoteService;
-import moviedb.util.json.JsonUtil;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 
-import java.time.LocalDate;
-
 import static moviedb.TestUtil.*;
-import static moviedb.testdata.ActorTestData.*;
-import static moviedb.testdata.ActorTestData.assertMatch;
-import static moviedb.testdata.MovieTestData.MOVIE_ID;
+import static moviedb.testdata.MovieTestData.*;
 import static moviedb.testdata.UserTestData.ADMIN;
 import static moviedb.testdata.UserTestData.USER;
 import static moviedb.testdata.VoteTestData.*;
 import static moviedb.testdata.VoteTestData.assertMatch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class VoteControllerTest extends AbstractControllerTest {
     private static final String REST_URL = VoteRestController.REST_URL + '/';
@@ -31,7 +25,6 @@ public class VoteControllerTest extends AbstractControllerTest {
 
     @Test
     public void testDelete() throws Exception {
-        //mockAuthorize(USER);
         mockMvc.perform(delete(REST_URL + MOVIE_ID)
                 .with(userAuth(USER)))
                 .andExpect(status().isNoContent());
@@ -47,27 +40,32 @@ public class VoteControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    public void testUpdate() throws Exception {
-        Actor updated = new Actor(ACTOR_ID_4, "Oleg", "Petrov", LocalDate.of(2018, 1, 1));
-
-        mockMvc.perform(put(REST_URL)
+    public void testCreate() throws Exception {
+        ResultActions action = mockMvc.perform(post(REST_URL + "?movie_id=" + MOVIE3.getId() + "&mark=" + 5)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(updated))
-                .with(userHttpBasic(ADMIN)))
-                .andExpect(status().isOk());
+                .with(userHttpBasic(USER)));
 
-//        assertMatch(service.get(ACTOR_ID_4), updated);
+        Vote created = readFromJson(action, Vote.class);
+        created.setMovie(MOVIE3);
+        created.setUser(USER);
+        assertMatch(service.getAll(), VOTE, VOTE1, VOTE2, VOTE3, VOTE4, VOTE5, VOTE6, VOTE7, created);
     }
 
     @Test
-    public void testUpdateInvalid() throws Exception {
-        Actor updated = new Actor(ACTOR_ID_4, "Kate", "Winslet", LocalDate.of(2018, 1, 1));
-
-        mockMvc.perform(put(REST_URL)
+    public void testCreateDuplicate() throws Exception {
+        mockMvc.perform(post(REST_URL + "?movie_id=" + MOVIE.getId() + "&mark=" + 5)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(updated))
-                .with(userHttpBasic(ADMIN)))
+                .with(userHttpBasic(USER)))
                 .andExpect(status().isConflict())
                 .andExpect(jsonPath("$.type").value("DATA_ERROR"));
+    }
+
+    @Test
+    public void testGetByUser() throws Exception {
+        mockMvc.perform(get(REST_URL + "user")
+                .with(userHttpBasic(USER)))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(contentJsonArray(VOTE, VOTE1, VOTE2));
     }
 }
