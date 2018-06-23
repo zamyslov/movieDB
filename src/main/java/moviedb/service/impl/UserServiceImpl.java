@@ -4,7 +4,6 @@ import moviedb.controller.AuthorizedUser;
 import moviedb.model.User;
 import moviedb.repository.UserRepository;
 import moviedb.service.UserService;
-import moviedb.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -33,12 +32,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void delete(int id) throws NotFoundException {
+    public void delete(int id) {
         checkNotFoundWithId(repository.delete(id), id);
     }
 
     @Override
-    public User get(int id) throws NotFoundException {
+    public User get(int id) {
         return checkNotFoundWithId(repository.get(id), id);
     }
 

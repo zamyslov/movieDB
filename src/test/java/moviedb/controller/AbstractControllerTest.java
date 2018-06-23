@@ -2,6 +2,8 @@ package moviedb.controller;
 
 import moviedb.config.JpaConfig;
 import moviedb.config.SpringSecurityConfig;
+import moviedb.util.MessageUtil;
+import moviedb.util.exception.ErrorType;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +15,14 @@ import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 import javax.annotation.PostConstruct;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @Sql(scripts = "classpath:data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD,
@@ -44,6 +49,9 @@ abstract public class AbstractControllerTest {
     @Autowired
     private FilterChainProxy filterChainProxy;
 
+    @Autowired
+    protected MessageUtil messageUtil;
+
     @PostConstruct
     private void postConstruct() {
         mockMvc = MockMvcBuilders
@@ -57,5 +65,18 @@ abstract public class AbstractControllerTest {
     public void setUp() {
         cacheManager.getCache("users").clear();
     }
+
+    public ResultMatcher jsonMessage(String path, String code) {
+        return jsonPath(path).value(getMessage(code));
+    }
+
+    protected String getMessage(String code) {
+        return messageUtil.getMessage(code);
+    }
+
+    public ResultMatcher errorType(ErrorType type) {
+        return jsonPath("$.type").value(type.name());
+    }
+
 
 }

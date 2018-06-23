@@ -1,12 +1,12 @@
 package moviedb.service;
 
-import moviedb.AbstractServiceTest;
 import moviedb.model.Vote;
 import moviedb.service.impl.VoteServiceImpl;
 import moviedb.util.exception.NotFoundException;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static moviedb.TestUtil.mockAuthorize;
 import static moviedb.testdata.MovieTestData.MOVIE;
 import static moviedb.testdata.MovieTestData.MOVIE3;
 import static moviedb.testdata.UserTestData.USER;
@@ -43,6 +43,7 @@ public class VoteServiceImplTest extends AbstractServiceTest {
     @Test
     @SuppressWarnings("ConstantConditions")
     public void getByUser() {
+        mockAuthorize(USER);
         assertMatch(service.getByUser(), VOTE, VOTE1, VOTE2);
     }
 

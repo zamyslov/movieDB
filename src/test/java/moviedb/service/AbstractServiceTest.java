@@ -1,4 +1,4 @@
-package moviedb;
+package moviedb.service;
 
 import moviedb.config.JpaConfig;
 import org.junit.runner.RunWith;

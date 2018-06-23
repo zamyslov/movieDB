@@ -1,6 +1,5 @@
 package moviedb.service;
 
-import moviedb.AbstractServiceTest;
 import moviedb.model.Movie;
 import moviedb.service.impl.MovieServiceImpl;
 import moviedb.util.exception.NotFoundException;

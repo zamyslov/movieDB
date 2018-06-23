@@ -1,6 +1,5 @@
 package moviedb.service;
 
-import moviedb.AbstractServiceTest;
 import moviedb.model.Role;
 import moviedb.model.User;
 import moviedb.service.impl.UserServiceImpl;
@@ -23,9 +22,9 @@ import static moviedb.testdata.UserTestData.USER2;
 import static moviedb.testdata.UserTestData.USER3;
 import static moviedb.testdata.UserTestData.USER_ID;
 import static moviedb.testdata.UserTestData.USER_ID_3;
-import static moviedb.testdata.UserTestData.VOTES;
 import static moviedb.testdata.UserTestData.assertMatch;
 import static moviedb.testdata.VoteTestData.assertMatch;
+import static moviedb.testdata.VoteTestData.*;
 
 public class UserServiceImplTest extends AbstractServiceTest {
 
@@ -100,7 +99,7 @@ public class UserServiceImplTest extends AbstractServiceTest {
     @Test
     public void getVotes() {
         User user = service.get(USER_ID);
-        assertMatch(user.getVotes(), VOTES);
+        assertMatch(user.getVotes(), VOTE2, VOTE, VOTE1);
     }
 
     @Test
