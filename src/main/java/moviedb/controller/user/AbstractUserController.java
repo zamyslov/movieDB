@@ -45,4 +45,10 @@ public abstract class AbstractUserController {
         service.update(user);
     }
 
+    public User getByLogin(String login) {
+        log.info("getByLogin {}", login);
+        return service.getByLogin(login);
+    }
+
+
 }
